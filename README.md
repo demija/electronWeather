@@ -35,4 +35,4 @@ electron-packager . --all
 
 
 # Screenshots
-![01](https://github.com/demija/electronApp/blob/master/screenshots/01.png)
+![01](https://github.com/demija/electronWeather/blob/master/screenshots/01.png)
