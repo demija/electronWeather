@@ -8,7 +8,9 @@ Current location is fixed value of city **Sarajevo**. Plan in the future is to e
 
 # Deployment
 In order to build and package your app, we need the electron-packager module:
+```javascript
 npm install electron-packager -g
+```
 
 
 ### Building for a specific platform
