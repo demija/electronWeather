@@ -10,10 +10,12 @@ Current location is fixed value of city **Sarajevo**. Plan in the future is to e
 In order to build and package your app, we need the electron-packager module:
 npm install electron-packager -g
 
-# Building for a specific platform
 
+### Building for a specific platform
 To build an application for a platform you'll need to execute the following command in the Node.js command prompt:
+```javascript
 electron-packager <sourcedir> <appname> --platform=<platform> --arch=<arch>
+```
 
 The possible  values for the platform option are:
 
@@ -28,10 +30,14 @@ And the possible values for the arch option are:
     armv7l (only for Linux)
 
 Example:
+```javascript
 electron-packager . --platform=win32 --arch=x86
+```
 
-# Building for all platforms
+### Building for all platforms
+```javascript
 electron-packager . --all
+```
 
 
 # Screenshots
