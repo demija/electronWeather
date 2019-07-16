@@ -1,0 +1,29 @@
+html,body {
+    height: 100%;
+    font-weight: 300!important;
+}
+  
+#leftPanel {
+    height: 100%;
+    background: linear-gradient(to bottom right, #ff3399 28%, #ff6666 75%);
+    padding-top: 25px;
+    padding-left: 40px;
+    color: aliceblue;
+}
+
+.icon {
+    fill: url(#my-gradient) #447799;
+    width: 64px;
+    height: 64px;
+}
+
+.tempFont {
+    background: -webkit-linear-gradient(#ff3399, #ff6666);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#location {
+    margin-bottom: 0rem !important;
+    font-size: 1.3rem !important;
+}

@@ -1,1 +1,38 @@
-# electronWeather
+# Weather app
+This is a minimal **Electron** application based on the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start) within the Electron documentation.
+
+Icons used in app are [Tick weather icons](https://www.deviantart.com/xiao4/art/tick-weather-icons-96294478). Weather API is provided by [OpenWeatherMap](https://openweathermap.org/).
+
+Current location is fixed value of city **Sarajevo**. Plan in the future is to enable custom locations.
+
+
+# Deployment
+In order to build and package your app, we need the electron-packager module:
+npm install electron-packager -g
+
+# Building for a specific platform
+
+To build an application for a platform you'll need to execute the following command in the Node.js command prompt:
+electron-packager <sourcedir> <appname> --platform=<platform> --arch=<arch>
+
+The possible  values for the platform option are:
+
+    Windows: win32
+    MacOS: darwin or mas
+    Linux: linux
+
+And the possible values for the arch option are:
+
+    32 Bits OS: x86
+    64 Bits OS: x64
+    armv7l (only for Linux)
+
+Example:
+electron-packager . --platform=win32 --arch=x86
+
+# Building for all platforms
+electron-packager . --all
+
+
+# Screenshots
+![01](https://github.com/demija/electronApp/blob/master/screenshots/01.png)

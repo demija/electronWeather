@@ -1,0 +1,27 @@
+{
+  "name": "weather-application",
+  "version": "1.0.0",
+  "description": "Weather Forecast App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . weather-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Weather Forecast App\"",
+    "package-linux": "electron-packager . weather-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/icon.png --prune=true --out=release-builds"
+  },
+  "repository": "https://github.com/demija/WeatherElectron",
+  "keywords": [
+    "Electron",
+    "demo"
+  ],
+  "author": "Adem Gabela",
+  "license": "",
+  "devDependencies": {
+    "electron": "^5.0.6",
+    "electron-packager": "^12.1.0"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "electron-unhandled": "^2.2.0"
+  }
+}
