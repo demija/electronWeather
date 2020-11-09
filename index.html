@@ -5,185 +5,110 @@
         <title>Weather forecast</title>
         <link rel="stylesheet" type="text/css" href="./style.css">
 
+        <link rel="stylesheet" type="text/css" href="./weather-icons.css">
+        <link rel="stylesheet" type="text/css" href="./weather-icons.min.css">
+
+        <link rel="stylesheet" type="text/css" href="./weather-icons-wind.css">
+        <link rel="stylesheet" type="text/css" href="./weather-icons-wind.min.css">
+
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <!-- jQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
     <body>
         <div class="container-fluid h-100">
             <div class="row h-100">
-                <div class="col-sm-4 hidden-md-down text-left" id="leftPanel">
-                    <div class="d-flex align-items-start flex-column" style="height: 600px;">
-                        <div class="mb-auto p-2"><p id="currentDate"></div>
-                        <div class="p-2">
-                            <img id="currentWeatherIcon" src="./icons/dunno.png">
-                            <h1 id="temperature" class="font-weight-light display-4"></h1>
-                            <p id="location"></p>
-                            <p id="forecast"></p>
-                        </div>
+                <div class="col-sm-4 text-left px-5 py-4" id="leftPanel">
+                    <div class="input-group pb-5">
+                        <input type="text" class="form-control" id="cityName" placeholder="City">
+                        <span class="input-group-btn">
+                            <button class="btn btn-info" type="button" id="goBtn"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </span>
+                    </div>
+                    <div class="py-5">
+                        <h1 class="font-weight-light text-center text-info">
+                            <i id="currentWeatherIcon" class="wi wi-na"></i>
+                        </h1>
+                        <h1 class="font-weight-light display-1 text-info" id="temperature"></h1>
+                        <p id="feelsLike" class="text-muted"></p>
+                        <p id="forecast" class="text-muted"></p>
+                        <p id="rainVolume" class="text-muted"></p>
+                        <p id="snowVolume" class="text-muted"></p>
+                    </div>
+                    <hr>
+                    <div class="py-1">
+                        <h3 id="location" class="text-info"></h3>
+                        <h6 id="dt" class="text-muted"></h6>
                     </div>
                 </div>
-                <div class="col-sm-8" style="padding: 30px;">
-                    <p class="font-weight-light">Weather forecast</p>
+                <div class="col-sm-8 p-5">
+                    <p class="font-weight-light text-muted">Now</p>
+                    <div class="card-group">
+                        <div class="card m-2 border-0 rounded">
+                            <div class="card-header bg-transparent border-0 text-muted">Humidity</div>
+                            <div class="card-body text-center p-1">
+                                <p class="h3 text-info" id="humidity">&nbsp</p>
+                                <p class="h4 text-muted"><i class="wi wi-humidity"></i></p>
+                            </div>
+                        </div>
+                        <div class="card m-2 border-0 rounded">
+                            <div class="card-header bg-transparent border-0 text-muted">Pressure</div>
+                            <div class="card-body text-center p-1">
+                                <p class="h3 text-info" id="pressure">&nbsp</p>
+                                <p class="h4 text-muted"><i class="wi wi-barometer"></i></p>
+                            </div>
+                        </div>
+                        <div class="card m-2 border-0 rounded">
+                            <div class="card-header bg-transparent border-0 text-muted">Wind</div>
+                            <div class="card-body text-center p-1">
+                                <p class="h3 text-info" id="wind">&nbsp</p>
+                                <p class="h4 text-muted" id="windDirection"><i class="wi wi-strong-wind"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-group">
+                        <div class="card m-2 border-0 rounded">
+                            <div class="card-header bg-transparent border-0 text-muted">Sunrise/Sunset</div>
+                            <div class="card-body p-1 mx-auto">
+                                <div class="progress">
+                                    <span class="d-none" id="currentSunPosition">0</span>
+                                    <div class="barOverflow">
+                                        <div class="bar"></div>
+                                    </div>
+                                </div>
+                                <p class="h4 text-muted">
+                                    <div class="d-flex justify-content-between text-muted">
+                                        <i class="wi wi-sunrise"></i>
+                                        <i class="wi wi-sunset"></i>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card m-2 border-0 rounded">
+                            <div class="card-header bg-transparent border-0 text-muted">Visibility</div>
+                            <div class="card-body text-center p-1">
+                                <p class="h3 text-info" id="visibility">&nbsp</p>
+                                <p class="h4 text-muted"><i class="wi wi-small-craft-advisory"></i></p>
+                            </div>
+                        </div>
+                        <div class="card m-2 border-0 rounded">
+                            <div class="card-header bg-transparent border-0 text-muted">Cloudiness</div>
+                            <div class="card-body text-center p-1">
+                                <p class="h3 text-info" id="clouds">&nbsp</p>
+                                <p class="h4 text-muted"><i class="wi wi-cloudy"></i></p>
+                            </div>
+                        </div>
+                    </div>
                     <hr>
-                    <div class="row justify-content-center">
-                        <div class="col-2 text-center">
-                            <svg class="icon" viewBox="0 0 30 30">
-                                <path d="M7.69,13.2c0-0.99,0.19-1.94,0.58-2.85c0.39-0.91,0.91-1.68,1.57-2.33s1.44-1.17,2.34-1.56c0.9-0.39,1.85-0.58,2.84-0.58
-                                c0.99,0,1.94,0.19,2.85,0.58c0.9,0.39,1.68,0.91,2.33,1.56c0.65,0.65,1.17,1.43,1.56,2.33s0.58,1.85,0.58,2.85
-                                c0,1.62-0.48,3.06-1.44,4.34c-0.96,1.27-2.2,2.14-3.71,2.61v3.29h-4.24v-3.25c-1.54-0.45-2.81-1.32-3.79-2.61S7.69,14.83,7.69,13.2z
-                                    M9.3,13.2c0,1.55,0.56,2.88,1.69,3.99c1.11,1.12,2.45,1.68,4.02,1.68c1.03,0,1.99-0.25,2.86-0.76c0.88-0.51,1.57-1.2,2.09-2.07
-                                c0.51-0.87,0.77-1.82,0.77-2.85c0-0.77-0.15-1.5-0.45-2.21s-0.71-1.31-1.22-1.82c-0.51-0.51-1.12-0.92-1.83-1.22
-                                c-0.71-0.3-1.44-0.45-2.21-0.45c-0.77,0-1.5,0.15-2.21,0.45s-1.31,0.71-1.82,1.22c-0.51,0.51-0.92,1.12-1.22,1.82
-                                C9.45,11.7,9.3,12.43,9.3,13.2z M9.88,13.56v-0.72h2.17v0.72H9.88z M10.97,10.02l0.52-0.52l1.52,1.52l-0.52,0.53L10.97,10.02z
-                                    M13.5,14.95c0-0.42,0.15-0.78,0.44-1.09c0.29-0.31,0.65-0.47,1.06-0.48l2.73-4.49l0.66,0.35l-2.02,4.83
-                                c0.18,0.25,0.26,0.54,0.26,0.88c0,0.44-0.15,0.81-0.46,1.11c-0.31,0.3-0.68,0.45-1.12,0.45c-0.43,0-0.8-0.15-1.1-0.45
-                                C13.65,15.76,13.5,15.39,13.5,14.95z M14.81,10.28V8.12h0.69v2.17H14.81z M17.75,13.55v-0.74h2.17v0.74H17.75z"/>
-                            </svg>
-                        </div>
-                        <div class="col-2 text-center">
-                            <svg class="icon" viewBox="0 0 30 30">
-                                <path d="M7.56,17.19c0-0.88,0.24-1.89,0.72-3.03s1.1-2.25,1.86-3.31c1.56-2.06,2.92-3.62,4.06-4.67l0.75-0.72
-                                c0.25,0.26,0.53,0.5,0.83,0.72c0.41,0.42,1.04,1.11,1.88,2.09s1.57,1.85,2.17,2.65c0.71,1.01,1.32,2.1,1.81,3.25
-                                s0.74,2.16,0.74,3.03c0,1-0.19,1.95-0.58,2.86c-0.39,0.91-0.91,1.7-1.57,2.36c-0.66,0.66-1.45,1.19-2.37,1.58
-                                c-0.92,0.39-1.89,0.59-2.91,0.59c-1,0-1.95-0.19-2.86-0.57c-0.91-0.38-1.7-0.89-2.36-1.55c-0.66-0.65-1.19-1.44-1.58-2.35
-                                S7.56,18.23,7.56,17.19z M9.82,14.26c0,0.83,0.17,1.49,0.52,1.99c0.35,0.49,0.88,0.74,1.59,0.74c0.72,0,1.25-0.25,1.61-0.74
-                                c0.35-0.49,0.53-1.15,0.54-1.99c-0.01-0.84-0.19-1.5-0.54-2c-0.35-0.49-0.89-0.74-1.61-0.74c-0.71,0-1.24,0.25-1.59,0.74
-                                C9.99,12.76,9.82,13.42,9.82,14.26z M11.39,14.26c0-0.15,0-0.27,0-0.35s0.01-0.19,0.02-0.33c0.01-0.14,0.02-0.25,0.05-0.32
-                                s0.05-0.16,0.09-0.24c0.04-0.08,0.09-0.15,0.15-0.18c0.07-0.04,0.14-0.06,0.23-0.06c0.14,0,0.25,0.04,0.33,0.12s0.14,0.21,0.17,0.38
-                                c0.03,0.18,0.05,0.32,0.06,0.45s0.01,0.3,0.01,0.52c0,0.23,0,0.4-0.01,0.52c-0.01,0.12-0.03,0.27-0.06,0.45
-                                c-0.03,0.17-0.09,0.3-0.17,0.38s-0.19,0.12-0.33,0.12c-0.09,0-0.16-0.02-0.23-0.06c-0.07-0.04-0.12-0.1-0.15-0.18
-                                c-0.04-0.08-0.07-0.17-0.09-0.24c-0.02-0.08-0.04-0.19-0.05-0.32c-0.01-0.14-0.02-0.25-0.02-0.32S11.39,14.41,11.39,14.26z
-                                    M11.98,22.01h1.32l4.99-10.74h-1.35L11.98,22.01z M16.28,19.02c0.01,0.84,0.2,1.5,0.55,2c0.35,0.49,0.89,0.74,1.6,0.74
-                                c0.72,0,1.25-0.25,1.6-0.74c0.35-0.49,0.52-1.16,0.53-2c-0.01-0.84-0.18-1.5-0.53-1.99c-0.35-0.49-0.88-0.74-1.6-0.74
-                                c-0.71,0-1.25,0.25-1.6,0.74C16.47,17.52,16.29,18.18,16.28,19.02z M17.85,19.02c0-0.23,0-0.4,0.01-0.52
-                                c0.01-0.12,0.03-0.27,0.06-0.45s0.09-0.3,0.17-0.38s0.19-0.12,0.33-0.12c0.09,0,0.17,0.02,0.24,0.06c0.07,0.04,0.12,0.1,0.16,0.19
-                                c0.04,0.09,0.07,0.17,0.1,0.24s0.04,0.18,0.05,0.32l0.01,0.32l0,0.34c0,0.16,0,0.28,0,0.35l-0.01,0.32l-0.05,0.32l-0.1,0.24
-                                l-0.16,0.19l-0.24,0.06c-0.14,0-0.25-0.04-0.33-0.12s-0.14-0.21-0.17-0.38c-0.03-0.18-0.05-0.33-0.06-0.45S17.85,19.25,17.85,19.02z"/>
-                            </svg>
-                        </div>
-                        <div class="col-2 text-center">
-                            <svg class="icon" viewBox="0 0 30 30">
-                                <path d="M4.61,16.88c0-1.15,0.36-2.17,1.08-3.07c0.72-0.9,1.63-1.48,2.74-1.73c0.31-1.37,1.02-2.49,2.11-3.37s2.35-1.32,3.76-1.32
-                                c1.38,0,2.61,0.43,3.69,1.28s1.78,1.95,2.1,3.29h0.33c0.9,0,1.73,0.22,2.49,0.65s1.37,1.03,1.81,1.79c0.44,0.76,0.67,1.58,0.67,2.48
-                                c0,0.88-0.21,1.7-0.63,2.45s-1,1.35-1.73,1.8c-0.73,0.45-1.54,0.69-2.41,0.72H9.41c-1.34-0.06-2.47-0.57-3.4-1.53
-                                C5.08,19.37,4.61,18.22,4.61,16.88z M6.32,16.88c0,0.87,0.3,1.62,0.9,2.26s1.33,0.98,2.19,1.03h11.19c0.86-0.04,1.59-0.39,2.19-1.03
-                                c0.61-0.64,0.91-1.4,0.91-2.26c0-0.88-0.33-1.63-0.98-2.27c-0.65-0.64-1.42-0.96-2.32-0.96H18.8c-0.11,0-0.17-0.06-0.17-0.18
-                                l-0.07-0.57c-0.11-1.08-0.58-1.99-1.4-2.72c-0.82-0.73-1.77-1.1-2.86-1.1c-1.09,0-2.05,0.37-2.85,1.1
-                                c-0.81,0.73-1.27,1.64-1.37,2.72l-0.08,0.57c0,0.12-0.07,0.18-0.2,0.18H9.27c-0.84,0.1-1.54,0.46-2.1,1.07S6.32,16.05,6.32,16.88z"/>
-                            </svg>
-                        </div>
-                        <div class="col-2 text-center">
-                            <svg class="icon" viewBox="0 0 30 30">
-                                <path d="M3.1,16.97c0,0.24,0.09,0.45,0.28,0.62c0.16,0.19,0.37,0.28,0.63,0.28H18.7c0.29,0,0.53,0.1,0.73,0.3
-                                c0.2,0.2,0.3,0.45,0.3,0.74c0,0.29-0.1,0.53-0.3,0.72c-0.2,0.19-0.44,0.29-0.74,0.29c-0.29,0-0.54-0.1-0.73-0.29
-                                c-0.16-0.18-0.36-0.26-0.6-0.26c-0.25,0-0.46,0.09-0.64,0.26s-0.27,0.38-0.27,0.61c0,0.25,0.09,0.46,0.28,0.63
-                                c0.56,0.55,1.22,0.83,1.96,0.83c0.78,0,1.45-0.27,2.01-0.81c0.56-0.54,0.83-1.19,0.83-1.97s-0.28-1.44-0.84-2
-                                c-0.56-0.56-1.23-0.84-2-0.84H4.01c-0.25,0-0.46,0.09-0.64,0.26C3.19,16.51,3.1,16.72,3.1,16.97z M3.1,13.69
-                                c0,0.23,0.09,0.43,0.28,0.61c0.17,0.18,0.38,0.26,0.63,0.26h20.04c0.78,0,1.45-0.27,2.01-0.82c0.56-0.54,0.84-1.2,0.84-1.97
-                                c0-0.77-0.28-1.44-0.84-1.99s-1.23-0.83-2.01-0.83c-0.77,0-1.42,0.27-1.95,0.8c-0.18,0.16-0.27,0.38-0.27,0.67
-                                c0,0.26,0.09,0.47,0.26,0.63c0.17,0.16,0.38,0.24,0.63,0.24c0.24,0,0.45-0.08,0.63-0.24c0.19-0.21,0.42-0.31,0.7-0.31
-                                c0.29,0,0.53,0.1,0.73,0.3c0.2,0.2,0.3,0.44,0.3,0.73c0,0.29-0.1,0.53-0.3,0.72c-0.2,0.19-0.44,0.29-0.73,0.29H4.01
-                                c-0.25,0-0.46,0.09-0.64,0.26C3.19,13.23,3.1,13.44,3.1,13.69z"/>
-                            </svg>
-                        </div>
-                        <div class="col-2 text-center">
-                            <svg class="icon" viewBox="0 0 30 30">
-                                <path d="M2.75,15.36c0-0.25,0.1-0.48,0.3-0.69c0.22-0.19,0.46-0.29,0.7-0.29h2.33c0.27,0,0.49,0.1,0.67,0.29
-                                c0.18,0.19,0.27,0.43,0.27,0.69c0,0.29-0.09,0.53-0.27,0.72c-0.18,0.19-0.41,0.29-0.67,0.29H3.75c-0.27,0-0.5-0.1-0.7-0.3
-                                C2.85,15.86,2.75,15.62,2.75,15.36z M6.08,7.38c0-0.27,0.09-0.5,0.26-0.68C6.57,6.5,6.8,6.4,7.05,6.4c0.26,0,0.49,0.1,0.68,0.29
-                                l1.64,1.65c0.19,0.22,0.28,0.45,0.28,0.69c0,0.28-0.09,0.52-0.27,0.7s-0.4,0.28-0.66,0.28c-0.24,0-0.48-0.1-0.7-0.29L6.34,8.11
-                                C6.17,7.9,6.08,7.65,6.08,7.38z M8.08,20.88c0-0.28,0.1-0.51,0.29-0.68c0.18-0.17,0.4-0.26,0.68-0.26h2.63l3.11-2.92
-                                c0.1-0.08,0.21-0.08,0.34,0l3.16,2.92h2.77c0.27,0,0.5,0.09,0.69,0.28c0.19,0.18,0.29,0.41,0.29,0.67c0,0.27-0.1,0.5-0.29,0.69
-                                c-0.19,0.19-0.42,0.29-0.69,0.29h-3.38c-0.1,0-0.2-0.02-0.29-0.07l-2.41-2.27l-2.39,2.27c-0.08,0.05-0.17,0.07-0.28,0.07H9.05
-                                c-0.27,0-0.5-0.1-0.69-0.29C8.17,21.38,8.08,21.15,8.08,20.88z M9,15.36c0,0.97,0.21,1.85,0.62,2.64c0.02,0.12,0.11,0.18,0.25,0.18
-                                h1.88c0.07,0,0.12-0.03,0.15-0.08c0.03-0.06,0.02-0.12-0.02-0.19c-0.64-0.77-0.96-1.62-0.96-2.55c0-1.12,0.4-2.08,1.2-2.87
-                                c0.8-0.79,1.76-1.18,2.89-1.18c1.12,0,2.07,0.39,2.86,1.18c0.79,0.79,1.19,1.74,1.19,2.87c0,0.94-0.32,1.79-0.95,2.55
-                                c-0.04,0.07-0.05,0.13-0.03,0.19s0.07,0.08,0.15,0.08h1.9c0.13,0,0.21-0.06,0.23-0.18C20.8,17.23,21,16.35,21,15.36
-                                c0-0.81-0.16-1.59-0.48-2.32c-0.32-0.74-0.75-1.37-1.28-1.91c-0.53-0.53-1.17-0.96-1.91-1.28c-0.74-0.32-1.51-0.47-2.32-0.47
-                                c-0.81,0-1.59,0.16-2.33,0.47c-0.74,0.32-1.38,0.74-1.92,1.28c-0.54,0.53-0.97,1.17-1.29,1.91C9.16,13.77,9,14.54,9,15.36z
-                                    M14.03,6.4v-2.3c0-0.29,0.09-0.52,0.28-0.71s0.43-0.28,0.71-0.28c0.28,0,0.51,0.09,0.7,0.28S16,3.83,16,4.11v2.3
-                                c0,0.29-0.09,0.52-0.28,0.71c-0.18,0.18-0.42,0.28-0.7,0.28c-0.29,0-0.52-0.09-0.71-0.28C14.12,6.93,14.03,6.69,14.03,6.4z
-                                    M20.38,9.04c0-0.25,0.09-0.48,0.27-0.69l1.62-1.65c0.19-0.19,0.43-0.29,0.7-0.29c0.27,0,0.51,0.1,0.69,0.29
-                                c0.19,0.19,0.28,0.42,0.28,0.69c0,0.29-0.09,0.53-0.26,0.73L22,9.73c-0.21,0.19-0.45,0.29-0.7,0.29c-0.27,0-0.49-0.09-0.66-0.28
-                                S20.38,9.32,20.38,9.04z M22.99,15.36c0-0.27,0.09-0.5,0.27-0.69c0.18-0.19,0.4-0.29,0.66-0.29h2.35c0.27,0,0.5,0.1,0.69,0.29
-                                c0.19,0.19,0.29,0.43,0.29,0.69c0,0.28-0.1,0.51-0.29,0.71s-0.42,0.3-0.69,0.3h-2.35c-0.27,0-0.49-0.1-0.67-0.29
-                                C23.08,15.88,22.99,15.64,22.99,15.36z"/>
-                            </svg>
-                        </div>
-                        <div class="col-2 text-center">
-                            <svg class="icon" viewBox="0 0 30 30">
-                                <path d="M2.88,15.47c0-0.28,0.1-0.5,0.3-0.68c0.17-0.18,0.4-0.26,0.68-0.26h2.31c0.27,0,0.49,0.09,0.67,0.27
-                                c0.17,0.18,0.26,0.4,0.26,0.67c0,0.28-0.09,0.52-0.27,0.71c-0.18,0.19-0.4,0.29-0.66,0.29H3.87c-0.27,0-0.5-0.1-0.69-0.3
-                                C2.98,15.97,2.88,15.74,2.88,15.47z M6.17,7.61c0-0.28,0.08-0.51,0.25-0.68c0.2-0.2,0.43-0.3,0.7-0.3c0.29,0,0.51,0.1,0.68,0.3
-                                l1.62,1.63c0.46,0.44,0.46,0.89,0,1.35c-0.19,0.19-0.4,0.28-0.65,0.28c-0.22,0-0.44-0.09-0.68-0.28L6.43,8.29
-                                C6.26,8.11,6.17,7.88,6.17,7.61z M8.14,20.89c0-0.26,0.1-0.49,0.3-0.69c0.18-0.18,0.41-0.27,0.68-0.27h3.22
-                                c0.11,0,0.2,0.02,0.28,0.08l2.35,2.22L17.36,20c0.07-0.05,0.17-0.08,0.29-0.08h3.3c0.27,0,0.5,0.09,0.69,0.28
-                                c0.19,0.19,0.29,0.42,0.29,0.68c0,0.27-0.1,0.5-0.29,0.69c-0.19,0.19-0.42,0.29-0.69,0.29h-2.68l-3.14,2.84
-                                c-0.12,0.09-0.23,0.09-0.33,0l-3.08-2.84h-2.6c-0.27,0-0.5-0.1-0.69-0.29C8.24,21.39,8.14,21.16,8.14,20.89z M9.08,15.47
-                                c0,0.99,0.19,1.87,0.58,2.62c0.06,0.11,0.15,0.16,0.27,0.16h1.87c0.08,0,0.13-0.02,0.15-0.07c0.02-0.05-0.01-0.11-0.07-0.18
-                                c-0.59-0.74-0.89-1.59-0.89-2.53c0-1.1,0.39-2.04,1.18-2.81c0.79-0.77,1.74-1.16,2.85-1.16c1.1,0,2.04,0.39,2.83,1.16
-                                c0.78,0.78,1.18,1.71,1.18,2.8c0,0.94-0.3,1.79-0.89,2.53c-0.07,0.07-0.09,0.13-0.07,0.18c0.02,0.05,0.07,0.07,0.15,0.07h1.88
-                                c0.13,0,0.21-0.05,0.24-0.16c0.41-0.78,0.62-1.66,0.62-2.62c0-0.79-0.16-1.56-0.47-2.29s-0.74-1.37-1.27-1.9s-1.16-0.95-1.89-1.27
-                                c-0.73-0.32-1.5-0.47-2.3-0.47c-0.8,0-1.57,0.16-2.3,0.47c-0.73,0.32-1.36,0.74-1.89,1.27s-0.95,1.16-1.27,1.9
-                                S9.08,14.68,9.08,15.47z M14.04,6.66V4.33c0-0.27,0.1-0.5,0.29-0.69s0.42-0.29,0.69-0.29c0.27,0,0.5,0.1,0.69,0.29
-                                s0.29,0.42,0.29,0.69v2.32c0,0.27-0.1,0.5-0.29,0.69c-0.19,0.19-0.42,0.29-0.69,0.29c-0.27,0-0.5-0.1-0.69-0.29
-                                C14.13,7.15,14.04,6.93,14.04,6.66z M20.31,9.24c0-0.28,0.09-0.51,0.26-0.67l1.63-1.63c0.16-0.2,0.39-0.3,0.68-0.3
-                                c0.27,0,0.5,0.1,0.68,0.29c0.18,0.19,0.27,0.42,0.27,0.69c0,0.28-0.08,0.51-0.25,0.68l-1.66,1.63c-0.23,0.19-0.46,0.28-0.69,0.28
-                                c-0.26,0-0.48-0.09-0.66-0.28C20.4,9.74,20.31,9.51,20.31,9.24z M22.9,15.47c0-0.27,0.09-0.49,0.26-0.67
-                                c0.17-0.18,0.4-0.27,0.67-0.27h2.32c0.27,0,0.5,0.09,0.69,0.27c0.19,0.18,0.29,0.4,0.29,0.67c0,0.27-0.1,0.5-0.29,0.7
-                                c-0.19,0.2-0.42,0.3-0.69,0.3h-2.32c-0.26,0-0.48-0.1-0.66-0.29C22.99,15.99,22.9,15.75,22.9,15.47z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center text-secondary">
-                        <div class="col-2 text-center">
-                            <span id="pressure" class="font-weight-light"></span>
-                        </div>
-                        <div class="col-2 text-center">
-                            <span id="humidity" class="font-weight-light"></span>
-                        </div>
-                        <div class="col-2 text-center">
-                            <span id="clouds" class="font-weight-light"></span>
-                        </div>
-                        <div class="col-2 text-center">
-                            <span id="wind" class="font-weight-light"></span>
-                        </div>
-                        <div class="col-2 text-center">
-                            <span id="sunrise" class="font-weight-light"></span>
-                        </div>
-                        <div class="col-2 text-center">
-                            <span id="sunset" class="font-weight-light"></span>
-                        </div>
-                        <!--<span id="vjetarPravac">-</span>-->
-                    </div>
-                    <br>
-                    <br>
-                    <!-- gradient -->
-                    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
-                        <linearGradient id="my-gradient" x2="1" y2="1">
-                            <stop offset="28%" stop-color="#ff3399" />
-                            <stop offset="75%" stop-color="#ff6666" />
-                        </linearGradient>
-                    </svg>
-                    <p class="font-weight-light">Next hours</p>
-                    <ul class="list-group list-group-flush text-secondary">
-                        <div id="forecastHoursElements"></div>
-                    </ul>
-                    <!--<div class="row">
-                        <div class="container">
-                            <p>Next days</p>
-                            <hr>
-                            <div class="row" id="forecastDaysElements"></div>
-                        </div>
-                    </div>-->
+                    <p class="font-weight-light text-muted">Daily Forecast</p>
+                    <div class="card-group weatherCard" id="dailyForecast"></div>
                 </div>
             </div>
         </div>
         
-        <!--
-            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" id="refreshBtn">Refresh</button>
-        -->
-
         <!--        
         <button id="sendSyncMsgBtn">Ping main process</button>
         <p id="syncReply">Awaiting response</p>
@@ -193,6 +118,8 @@
         -->
 
         <script>
+            window.$ = window.jQuery = require('jquery');
+
             // You can also require other files to run in this process
             require('./renderer.js');
         </script>

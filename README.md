@@ -1,9 +1,7 @@
 # Weather app
 This is a minimal **Electron** application based on the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start) within the Electron documentation.
 
-Icons used in app are [Tick weather icons](https://www.deviantart.com/xiao4/art/tick-weather-icons-96294478). Weather API is provided by [OpenWeatherMap](https://openweathermap.org/).
-
-Current location is fixed value of city **Sarajevo**. Plan in the future is to enable custom locations.
+Weather API is provided by [OpenWeatherMap](https://openweathermap.org/).
 
 
 # Deployment

@@ -1,29 +1,42 @@
 html,body {
     height: 100%;
     font-weight: 300!important;
+    background-color: #F6F6F8 !important;
+    color: #000000 !important;
 }
   
 #leftPanel {
-    height: 100%;
-    background: linear-gradient(to bottom right, #ff3399 28%, #ff6666 75%);
-    padding-top: 25px;
-    padding-left: 40px;
-    color: aliceblue;
+    background: #FFFFFF;
 }
 
-.icon {
-    fill: url(#my-gradient) #447799;
-    width: 64px;
-    height: 64px;
+.weatherCard {
+    height:15em !important;
 }
 
-.tempFont {
-    background: -webkit-linear-gradient(#ff3399, #ff6666);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+#currentWeatherIcon {
+    font-size: 12rem !important;
 }
 
-#location {
-    margin-bottom: 0rem !important;
-    font-size: 1.3rem !important;
+.progress {
+    background-color: #FFFFFF !important;
+    box-shadow: none !important;
+    height: 50px !important;
+}
+
+.barOverflow {
+    position: relative;
+    width: 100px; height: 50px;
+    margin-bottom: -14px;
+    overflow: hidden;
+}
+
+.bar {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 10px solid #ccc;
+    border-bottom-color: #17A2B8;
+    border-right-color: #17A2B8;
 }
