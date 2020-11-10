@@ -8,6 +8,7 @@ Weather API is provided by [OpenWeatherMap](https://openweathermap.org/).
 ## Built With
 * HTML
 * Bootstrap
+* Weather Icons
 * Javascript
 
 
@@ -38,7 +39,7 @@ And the possible values for the arch option are:
 
 Example:
 ```javascript
-electron-packager . --platform=win32 --arch=x86
+electron-packager . --platform=linux --arch=x64
 ```
 
 ### Building for all platforms

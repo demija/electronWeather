@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow, Menu} = require('electron');
+Menu.setApplicationMenu(false);
 
 const unhandled = require('electron-unhandled');
 unhandled();
@@ -16,18 +17,17 @@ function createWindow () {
         },
         width: 1024,
         height: 665,
-        //minWidth: 1100,
-        //minHeight: 700,
         resizable: false,
         show: false,
         center: true,
+        fullscreenable:false,
     });
 
     // and load the index.html of the app.
     mainWindow.loadFile('index.html');
 
     // hide menu bar
-    mainWindow.setMenuBarVisibility(false)
+    mainWindow.setMenuBarVisibility(true);
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools();

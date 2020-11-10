@@ -20,7 +20,7 @@ html,body {
 .progress {
     background-color: #FFFFFF !important;
     box-shadow: none !important;
-    height: 50px !important;
+    height: 55px !important;
 }
 
 .barOverflow {
@@ -39,4 +39,25 @@ html,body {
     border: 10px solid #ccc;
     border-bottom-color: #17A2B8;
     border-right-color: #17A2B8;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+    border-color: rgba(23, 162, 184, 0.8);
+    box-shadow: 0 0 8px rgba(23, 162, 184, 0.6);
+    outline: 0 none;
 }
