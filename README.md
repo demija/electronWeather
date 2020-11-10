@@ -1,7 +1,14 @@
+![fooo](https://github.com/demija/electronWeather/blob/master/screenshots/01.png)
+
 # Weather app
 This is a minimal **Electron** application based on the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start) within the Electron documentation.
-
 Weather API is provided by [OpenWeatherMap](https://openweathermap.org/).
+
+
+## Built With
+* HTML
+* Bootstrap
+* Javascript
 
 
 # Deployment
@@ -38,7 +45,3 @@ electron-packager . --platform=win32 --arch=x86
 ```javascript
 electron-packager . --all
 ```
-
-
-# Screenshots
-![01](https://github.com/demija/electronWeather/blob/master/screenshots/01.png)

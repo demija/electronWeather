@@ -3,8 +3,6 @@
 // All of the Node.js APIs are available in this process.
 
 const axios = require('axios');
-
-// Reference to button
 const search = document.getElementById('goBtn');
 
 animateSun();
@@ -19,9 +17,7 @@ console.log(store.get('unicorn'));
 console.log("IZ BAZE: " + store.get('unicorn'));
 */
 
-// Listener to button click
 search.addEventListener('click', function() {
-    console.log("KLIK NA DUGME!!!!!!");
     const cityName = document.getElementById('cityName').value;
     
     if(cityName !== null && cityName !== '') {
@@ -41,6 +37,7 @@ function getWeather(cityName) {
     }).then(res => {
         populateWeatherData(res);
     }).catch((error) => {
+        //TODO
         console.error(error);
     });
 }
@@ -56,6 +53,7 @@ function getForecast(cityName) {
     }).then(res => {
         populateForecastData(res);
     }).catch((error) => {
+        //TODO
         console.error(error);
     });
 }
@@ -75,15 +73,10 @@ function populateWeatherData(res) {
     setRainVolume(res.data.rain);
     setSnowVolume(res.data.snow);
     setSunPosition(res.data);
-
-    let windDirectionIcon = document.getElementById('windDirection');
-    windDirectionIcon.innerHTML = '<i class="wi wi-strong-wind"></i>';
-    windDirectionIcon.innerHTML += setWindDirection(res.data.wind);
+    setWind(res.data.wind.deg);
 }
 
 function populateForecastData(res) {
-    console.log("Daily forecast:");
-
     let dailyForecastArray = res.data.list.slice(1, 4);
     let dailyForecast = document.getElementById('dailyForecast');
     dailyForecast.innerHTML = '';
@@ -99,7 +92,7 @@ function populateForecastData(res) {
         weatherIcon.className = getWeatherIconClass(element.weather[0].id, element.weather[0].icon);
 
         let weatherIconHolder = document.createElement('p');
-        weatherIconHolder.className = 'h1 text-info';
+        weatherIconHolder.className = 'display-1 text-info py-3';
         weatherIconHolder.appendChild(weatherIcon);
 
         let forecastDescription = document.createElement('p');
@@ -108,16 +101,20 @@ function populateForecastData(res) {
 
         let temperatureMin = document.createElement('p');
         temperatureMin.className = 'text-muted';
-        temperatureMin.innerHTML = '<i class="wi wi-thermometer-exterior"></i> ' + Math.round(element.temp.min) + '<i class="wi wi-celsius"></i>';
+        temperatureMin.innerHTML = '<i class="wi wi-direction-down"></i> ' + Math.round(element.temp.min) + '<i class="wi wi-celsius"></i>';
 
         let temperatureMax = document.createElement('p');
         temperatureMax.className = 'text-muted';
-        temperatureMax.innerHTML = '<i class="wi wi-thermometer"></i> ' + Math.round(element.temp.max) + '<i class="wi wi-celsius"></i>';
+        temperatureMax.innerHTML = '<i class="wi wi-direction-up"></i> ' + Math.round(element.temp.max) + '<i class="wi wi-celsius"></i>';
 
         let temperatureDescription = document.createElement('div');
         temperatureDescription.className = 'd-flex justify-content-around text-muted px-2';
         temperatureDescription.appendChild(temperatureMin);
         temperatureDescription.appendChild(temperatureMax);
+
+        let wind = document.createElement('p');
+        wind.className = 'text-muted';
+        wind.innerHTML = '<i class="wi wi-strong-wind"></i> ' + getWindDirectionIconClass(element.deg) + ' ' + element.speed + ' m/s';
 
         let cardBody = document.createElement('div');
         cardBody.className = 'card-body text-center p-1';
@@ -125,6 +122,7 @@ function populateForecastData(res) {
         cardBody.appendChild(weatherIconHolder);
         cardBody.appendChild(forecastDescription);
         cardBody.appendChild(temperatureDescription);
+        cardBody.appendChild(wind);
 
         let innerDivCard = document.createElement('div');
         innerDivCard.className = 'card m-2 border-0 rounded';
@@ -283,51 +281,51 @@ function getWeatherIconClass(weatherId, weatherIcon) {
     }
 }
 
-function setWindDirection(wind) {
+function getWindDirectionIconClass(windDirection) {
     switch(true) {
-        case (wind.deg >= 0 && wind.deg < 23):
+        case (windDirection >= 0 && windDirection < 23):
             return ' <i class="wi wi-wind towards-0-deg"></i>';
 
-        case (wind.deg >= 23 && wind.deg < 45):
+        case (windDirection >= 23 && windDirection < 45):
             return ' <i class="wi wi-wind towards-23-deg"></i>';
 
-        case (wind.deg >= 45 && wind.deg < 68):
+        case (windDirection >= 45 && windDirection < 68):
             return ' <i class="wi wi-wind towards-45-deg"></i>';
 
-        case (wind.deg >= 68 && wind.deg < 90):
+        case (windDirection >= 68 && windDirection < 90):
             return ' <i class="wi wi-wind towards-68-deg"></i>';
 
-        case (wind.deg >= 90 && wind.deg < 113):
+        case (windDirection >= 90 && windDirection < 113):
             return ' <i class="wi wi-wind towards-90-deg"></i>';
 
-        case (wind.deg >= 113 && wind.deg < 135):
+        case (windDirection >= 113 && windDirection < 135):
             return ' <i class="wi wi-wind towards-113-deg"></i>';
 
-        case (wind.deg >= 135 && wind.deg < 158):
+        case (windDirection >= 135 && windDirection < 158):
             return ' <i class="wi wi-wind towards-135-deg"></i>';
 
-        case (wind.deg >= 158 && wind.deg < 180):
+        case (windDirection >= 158 && windDirection < 180):
             return ' <i class="wi wi-wind towards-158-deg"></i>';
 
-        case (wind.deg >= 180 && wind.deg < 203):
+        case (windDirection >= 180 && windDirection < 203):
             return ' <i class="wi wi-wind towards-180-deg"></i>';
 
-        case (wind.deg >= 203 && wind.deg < 225):
+        case (windDirection >= 203 && windDirection < 225):
             return ' <i class="wi wi-wind towards-203-deg"></i>';
 
-        case (wind.deg >= 225 && wind.deg < 248):
+        case (windDirection >= 225 && windDirection < 248):
             return ' <i class="wi wi-wind towards-225-deg"></i>';
 
-        case (wind.deg >= 248 && wind.deg < 270):
+        case (windDirection >= 248 && windDirection < 270):
             return ' <i class="wi wi-wind towards-248-deg"></i>';
 
-        case (wind.deg >= 270 && wind.deg < 293):
+        case (windDirection >= 270 && windDirection < 293):
             return ' <i class="wi wi-wind towards-270-deg"></i>';
 
-        case (wind.deg >= 293 && wind.deg < 313):
+        case (windDirection >= 293 && windDirection < 313):
             return ' <i class="wi wi-wind towards-293-deg"></i>';
 
-        case (wind.deg >= 313 && wind.deg < 336):
+        case (windDirection >= 313 && windDirection < 336):
             return ' <i class="wi wi-wind towards-313-deg"></i>';
             
         default:
@@ -336,26 +334,21 @@ function setWindDirection(wind) {
 }
 
 function setSunPosition(data) {
-    console.log("dt: " + getHoursMinutesFromUnix(data.dt + data.timezone));
-    console.log("sunrise: " + getHoursMinutesFromUnix(data.sys.sunrise + data.timezone));
-    console.log("sunset: " + getHoursMinutesFromUnix(data.sys.sunset + data.timezone));
-
     let sunPosition = document.getElementById('currentSunPosition');
     let currentTime = data.dt;
     let sunrise = data.sys.sunrise;
     let sunset = data.sys.sunset;
     let currentPosition = (currentTime - sunrise) * 100 / (sunset - sunrise);
 
-    if(currentPosition < 0 || currentPosition >= 100) {
+    if(currentPosition <= 0) {
+        sunPosition.innerText = 0;
+    } else if(currentPosition >=100) {
         sunPosition.innerText = 100;
     } else {
         sunPosition.innerText = currentPosition;
     }
     
     animateSun();
-
-    console.log('novo:');
-    console.log(currentPosition);
 }
 
 function animateSun() {
@@ -415,4 +408,10 @@ function setSnowVolume(snow) {
     } else {
         snowVolume.innerHTML = '';
     }
+}
+
+function setWind(windDirection) {
+    let windDirectionIcon = document.getElementById('windDirection');
+    windDirectionIcon.innerHTML = '<i class="wi wi-strong-wind"></i>';
+    windDirectionIcon.innerHTML += getWindDirectionIconClass(windDirection);
 }
