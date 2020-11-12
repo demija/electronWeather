@@ -1,3 +1,7 @@
+//
+//process.env.GOOGLE_API_KEY = 'AIzaSyAwqy59YOaKjS361DDUgl3Q01PCeYHyNI4';
+//
+
 // Modules to control application life and create native browser window
 const {app, BrowserWindow, Menu} = require('electron');
 Menu.setApplicationMenu(false);

@@ -46,62 +46,7 @@
                 </div>
                 <div class="col-sm-8 p-5">
                     <p class="font-weight-light text-muted">Now</p>
-                    <div class="card-group">
-                        <div class="card m-2 border-0 rounded">
-                            <div class="card-header bg-transparent border-0 text-muted">Humidity</div>
-                            <div class="card-body text-center p-1">
-                                <p class="h3 text-info" id="humidity">&nbsp</p>
-                                <p class="h4 text-muted"><i class="wi wi-humidity"></i></p>
-                            </div>
-                        </div>
-                        <div class="card m-2 border-0 rounded">
-                            <div class="card-header bg-transparent border-0 text-muted">Pressure</div>
-                            <div class="card-body text-center p-1">
-                                <p class="h3 text-info" id="pressure">&nbsp</p>
-                                <p class="h4 text-muted"><i class="wi wi-barometer"></i></p>
-                            </div>
-                        </div>
-                        <div class="card m-2 border-0 rounded">
-                            <div class="card-header bg-transparent border-0 text-muted">Wind</div>
-                            <div class="card-body text-center p-1">
-                                <p class="h3 text-info" id="wind">&nbsp</p>
-                                <p class="h4 text-muted" id="windDirection"><i class="wi wi-strong-wind"></i></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-group">
-                        <div class="card m-2 border-0 rounded">
-                            <div class="card-header bg-transparent border-0 text-muted">Sunrise/Sunset</div>
-                            <div class="card-body p-1 mx-auto">
-                                <div class="progress">
-                                    <span class="d-none" id="currentSunPosition">0</span>
-                                    <div class="barOverflow">
-                                        <div class="bar"></div>
-                                    </div>
-                                </div>
-                                <p class="h4 text-muted">
-                                    <div class="d-flex justify-content-between text-muted">
-                                        <i class="wi wi-sunrise"></i>
-                                        <i class="wi wi-sunset"></i>
-                                    </div>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="card m-2 border-0 rounded">
-                            <div class="card-header bg-transparent border-0 text-muted">Visibility</div>
-                            <div class="card-body text-center p-1">
-                                <p class="h3 text-info" id="visibility">&nbsp</p>
-                                <p class="h4 text-muted"><i class="wi wi-small-craft-advisory"></i></p>
-                            </div>
-                        </div>
-                        <div class="card m-2 border-0 rounded">
-                            <div class="card-header bg-transparent border-0 text-muted">Cloudiness</div>
-                            <div class="card-body text-center p-1">
-                                <p class="h3 text-info" id="clouds">&nbsp</p>
-                                <p class="h4 text-muted"><i class="wi wi-cloudy"></i></p>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="currentWeather"></div>
                     <hr>
                     <p class="font-weight-light text-muted">Daily Forecast</p>
                     <div class="card-group weatherCard" id="dailyForecast"></div>
