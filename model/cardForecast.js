@@ -13,7 +13,7 @@ class CardForecast {
         weatherIcon.className = Util.getWeatherIconClass(element.weather[0].id, element.weather[0].icon);
 
         let weatherIconHolder = document.createElement('p');
-        weatherIconHolder.className = 'display-1 text-info py-3';
+        weatherIconHolder.className = 'display-3 text-info py-3';
         weatherIconHolder.appendChild(weatherIcon);
 
         let forecastDescription = document.createElement('p');

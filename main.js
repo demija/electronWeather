@@ -34,7 +34,7 @@ function createWindow () {
     mainWindow.setMenuBarVisibility(true);
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
 
     // Wait for 'ready-to-show' to display our window
     mainWindow.once('ready-to-show', () => {

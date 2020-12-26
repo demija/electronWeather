@@ -52,7 +52,7 @@ function getForecast(cityName) {
     axios.get('http://api.openweathermap.org/data/2.5/forecast/daily', {
         params: {
             q: cityName,
-            cnt: 4,
+            cnt: 6,
             appid: 'cf06fb984f9d43a6b63abdfbbf30785d',
             units: 'metric'
         }
@@ -109,7 +109,7 @@ function populateWeatherData(res) {
 }
 
 function populateForecastData(res) {
-    let dailyForecastArray = res.data.list.slice(1, 4);
+    let dailyForecastArray = res.data.list.slice(1, 6);
     let dailyForecast = document.getElementById('dailyForecast');
     dailyForecast.innerHTML = '';
 
