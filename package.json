@@ -17,7 +17,7 @@
   "author": "Adem Gabela",
   "license": "",
   "devDependencies": {
-    "electron": "^10.2.0",
+    "electron": "^11.5.0",
     "electron-packager": "^15.2.0"
   },
   "dependencies": {
